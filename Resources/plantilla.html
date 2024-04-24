@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>paginaweb</title>
+	<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid #333;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+
+	</style>
+</head>
+<body>
+	<table style="width:100%">
+		<tbody>
+			<tr>
+				<td colspan="6"  align="center">
+					<p>Unidad de Gestion Educativa Local de Tacna - UGEL TACNA
+						<br />
+					RUC: 20533025057</p></td>
+				<td colspan="2">Fecha: @Fecha</td>
+			</tr>
+			<tr>
+				<td colspan="8" align="center">Record de licencia por salud</td>
+			</tr>
+			<tr>
+				<td colspan="4">Servidor: @ApeNom</td>
+				<td colspan="2">DNI: @DNI</td>
+				<td colspan="2">Situación: @T_Servicio</td>
+			</tr>
+			<tr>
+				<td colspan="8"></td>
+			</tr>
+			<tr>
+				<td colspan="8">Centro de Trabajo: @C_Trabajo</td>
+			</tr>
+			<tr align="center">
+				<td>Fecha Inicio</td>
+				<td>Fecha Inicio</td>
+				<td>Dias</td>
+				<td>Diagnostico</td>
+				<td>N° Certificado</td>
+				<td>N° Col Medico</td>
+				<td>Expediente</td>
+				<td>Observaciones</td>
+			</tr>
+			
+				@Filas
+			
+			<tr>
+				<td colspan="2">Dias Totales:</td>
+				<td colspan="1">@Total</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
