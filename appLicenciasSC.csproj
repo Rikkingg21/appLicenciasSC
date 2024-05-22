@@ -185,6 +185,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Logica\Conexion.cs" />
+    <Compile Include="Presentacion\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\FrmEditarNuevoCIT.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,12 +215,6 @@
     <Compile Include="Presentacion\FrmIngresoPersonalSubsidiado.Designer.cs">
       <DependentUpon>FrmIngresoPersonalSubsidiado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\FrmInicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FrmInicio.Designer.cs">
-      <DependentUpon>FrmInicio.cs</DependentUpon>
-    </Compile>
     <Compile Include="Presentacion\FrmVistaPDF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +232,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\FrmEditarNuevoCIT.resx">
       <DependentUpon>FrmEditarNuevoCIT.cs</DependentUpon>
     </EmbeddedResource>
@@ -243,9 +246,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\FrmIngresoPersonalSubsidiado.resx">
       <DependentUpon>FrmIngresoPersonalSubsidiado.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\FrmInicio.resx">
-      <DependentUpon>FrmInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\FrmVistaPDF.resx">
       <DependentUpon>FrmVistaPDF.cs</DependentUpon>

@@ -183,3 +183,7 @@ C:\Users\RicardithoElMazCapit\source\repos\appLicenciasSC\appLicenciasSC\obj\Deb
 C:\Users\RicardithoElMazCapit\source\repos\appLicenciasSC\appLicenciasSC\obj\Debug\AxInterop.AcroPDFLib.dll
 C:\Users\RicardithoElMazCapit\source\repos\appLicenciasSC\appLicenciasSC\obj\Debug\appLicen.5AA42E4E.Up2Date
 C:\Users\Informatica\source\repos\appLicenciasSC\appLicenciasSC\obj\Debug\appLicenciasSC.Presentacion.SeleccionDePeriodo.resources
+<<<<<<< HEAD
+=======
+C:\Users\Informatica\source\repos\appLicenciasSC\appLicenciasSC\obj\Debug\appLicenciasSC.Presentacion.Form1.resources
+>>>>>>> da71fdea77607ece046f48197a89e824ef17b75d
