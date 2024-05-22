@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmIngresoPersonalSubsidiado));
             this.btnGuardar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cBoxTipoServidor = new System.Windows.Forms.ComboBox();
-            this.txtCargo2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -43,14 +43,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtApeNom = new System.Windows.Forms.TextBox();
             this.txtAutogenerado = new System.Windows.Forms.TextBox();
             this.txtCTrabajo = new System.Windows.Forms.TextBox();
             this.txtCargo = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +61,7 @@
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
             this.btnGuardar.Location = new System.Drawing.Point(308, 258);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(136, 36);
+            this.btnGuardar.Size = new System.Drawing.Size(183, 36);
             this.btnGuardar.TabIndex = 16;
             this.btnGuardar.Text = "Registrar";
             this.btnGuardar.UseVisualStyleBackColor = false;
@@ -84,14 +82,29 @@
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseUp);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(717, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(40, 40);
+            this.button1.TabIndex = 2;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Open Sans", 15.75F);
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(12, 6);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(294, 25);
+            this.label9.Size = new System.Drawing.Size(301, 28);
             this.label9.TabIndex = 1;
             this.label9.Text = "Ingresar Personal Subsidiado";
             // 
@@ -112,15 +125,13 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.cBoxTipoServidor);
-            this.panel1.Controls.Add(this.txtCargo2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtCodigo);
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.txtDNI);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txtApeNom);
@@ -146,17 +157,11 @@
             "AUXILIAR NOMBRADO",
             "AUXILIAR CONTRATADO",
             "PERSONAL DEL CAS"});
-            this.cBoxTipoServidor.Location = new System.Drawing.Point(493, 159);
+            this.cBoxTipoServidor.Location = new System.Drawing.Point(493, 10);
             this.cBoxTipoServidor.Name = "cBoxTipoServidor";
             this.cBoxTipoServidor.Size = new System.Drawing.Size(252, 33);
             this.cBoxTipoServidor.TabIndex = 16;
-            // 
-            // txtCargo2
-            // 
-            this.txtCargo2.Location = new System.Drawing.Point(573, 12);
-            this.txtCargo2.Name = "txtCargo2";
-            this.txtCargo2.Size = new System.Drawing.Size(172, 31);
-            this.txtCargo2.TabIndex = 15;
+            this.cBoxTipoServidor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cBoxTipoServidor_KeyPress);
             // 
             // label1
             // 
@@ -180,10 +185,11 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(352, 12);
+            this.txtCodigo.Location = new System.Drawing.Point(493, 161);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(127, 31);
+            this.txtCodigo.Size = new System.Drawing.Size(252, 31);
             this.txtCodigo.TabIndex = 14;
+            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
             // label3
             // 
@@ -209,7 +215,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(347, 164);
+            this.label8.Location = new System.Drawing.Point(347, 15);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(140, 25);
             this.label8.TabIndex = 12;
@@ -225,29 +231,20 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Autogenerado";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(497, 15);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 25);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Cargo";
-            // 
             // txtDNI
             // 
-            this.txtDNI.Location = new System.Drawing.Point(131, 12);
+            this.txtDNI.Location = new System.Drawing.Point(163, 12);
             this.txtDNI.MaxLength = 8;
             this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(139, 31);
+            this.txtDNI.Size = new System.Drawing.Size(178, 31);
             this.txtDNI.TabIndex = 5;
+            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(276, 15);
+            this.label6.Location = new System.Drawing.Point(407, 164);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(80, 25);
             this.label6.TabIndex = 10;
@@ -255,46 +252,35 @@
             // 
             // txtApeNom
             // 
-            this.txtApeNom.Location = new System.Drawing.Point(131, 49);
+            this.txtApeNom.Location = new System.Drawing.Point(163, 49);
             this.txtApeNom.Name = "txtApeNom";
-            this.txtApeNom.Size = new System.Drawing.Size(614, 31);
+            this.txtApeNom.Size = new System.Drawing.Size(582, 31);
             this.txtApeNom.TabIndex = 6;
+            this.txtApeNom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApeNom_KeyPress_1);
             // 
             // txtAutogenerado
             // 
             this.txtAutogenerado.Location = new System.Drawing.Point(163, 161);
             this.txtAutogenerado.Name = "txtAutogenerado";
-            this.txtAutogenerado.Size = new System.Drawing.Size(149, 31);
+            this.txtAutogenerado.Size = new System.Drawing.Size(178, 31);
             this.txtAutogenerado.TabIndex = 9;
+            this.txtAutogenerado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAutogenerado_KeyPress);
             // 
             // txtCTrabajo
             // 
-            this.txtCTrabajo.Location = new System.Drawing.Point(131, 86);
+            this.txtCTrabajo.Location = new System.Drawing.Point(163, 86);
             this.txtCTrabajo.Name = "txtCTrabajo";
-            this.txtCTrabajo.Size = new System.Drawing.Size(614, 31);
+            this.txtCTrabajo.Size = new System.Drawing.Size(582, 31);
             this.txtCTrabajo.TabIndex = 7;
+            this.txtCTrabajo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCTrabajo_KeyPress);
             // 
             // txtCargo
             // 
-            this.txtCargo.Location = new System.Drawing.Point(131, 123);
+            this.txtCargo.Location = new System.Drawing.Point(163, 123);
             this.txtCargo.Name = "txtCargo";
-            this.txtCargo.Size = new System.Drawing.Size(614, 31);
+            this.txtCargo.Size = new System.Drawing.Size(582, 31);
             this.txtCargo.TabIndex = 8;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(717, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 2;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.txtCargo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCargo_KeyPress);
             // 
             // FrmIngresoPersonalSubsidiado
             // 
@@ -325,7 +311,6 @@
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cBoxTipoServidor;
-        private System.Windows.Forms.TextBox txtCargo2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCodigo;
@@ -333,7 +318,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtApeNom;

@@ -32,7 +32,6 @@
             this.btnActualizar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cBoxTipoServidor = new System.Windows.Forms.ComboBox();
-            this.txtCargo2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -40,7 +39,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtApeNom = new System.Windows.Forms.TextBox();
@@ -48,8 +46,8 @@
             this.txtCTrabajo = new System.Windows.Forms.TextBox();
             this.txtCargo = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnCerrar = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnCerrar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +58,7 @@
             this.btnActualizar.FlatAppearance.BorderSize = 0;
             this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnActualizar.Location = new System.Drawing.Point(281, 265);
+            this.btnActualizar.Location = new System.Drawing.Point(308, 258);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(183, 36);
             this.btnActualizar.TabIndex = 19;
@@ -71,7 +69,6 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.cBoxTipoServidor);
-            this.panel1.Controls.Add(this.txtCargo2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtCodigo);
@@ -79,16 +76,15 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.txtDNI);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txtApeNom);
             this.panel1.Controls.Add(this.txtAutogenerado);
             this.panel1.Controls.Add(this.txtCTrabajo);
             this.panel1.Controls.Add(this.txtCargo);
-            this.panel1.Location = new System.Drawing.Point(0, 43);
+            this.panel1.Location = new System.Drawing.Point(0, 40);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(755, 216);
+            this.panel1.Size = new System.Drawing.Size(757, 201);
             this.panel1.TabIndex = 20;
             // 
             // cBoxTipoServidor
@@ -104,19 +100,11 @@
             "AUXILIAR NOMBRADO",
             "AUXILIAR CONTRATADO",
             "PERSONAL DEL CAS"});
-            this.cBoxTipoServidor.Location = new System.Drawing.Point(493, 159);
+            this.cBoxTipoServidor.Location = new System.Drawing.Point(493, 10);
             this.cBoxTipoServidor.Name = "cBoxTipoServidor";
             this.cBoxTipoServidor.Size = new System.Drawing.Size(252, 33);
             this.cBoxTipoServidor.TabIndex = 16;
             this.cBoxTipoServidor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cBoxTipoServidor_KeyPress);
-            // 
-            // txtCargo2
-            // 
-            this.txtCargo2.Location = new System.Drawing.Point(573, 12);
-            this.txtCargo2.Name = "txtCargo2";
-            this.txtCargo2.Size = new System.Drawing.Size(172, 31);
-            this.txtCargo2.TabIndex = 15;
-            this.txtCargo2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCargo2_KeyPress);
             // 
             // label1
             // 
@@ -140,9 +128,9 @@
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(352, 12);
+            this.txtCodigo.Location = new System.Drawing.Point(493, 161);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(127, 31);
+            this.txtCodigo.Size = new System.Drawing.Size(252, 31);
             this.txtCodigo.TabIndex = 14;
             this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
@@ -170,7 +158,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(347, 164);
+            this.label8.Location = new System.Drawing.Point(347, 15);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(140, 25);
             this.label8.TabIndex = 12;
@@ -186,29 +174,19 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Autogenerado";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(497, 15);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 25);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Cargo";
-            // 
             // txtDNI
             // 
-            this.txtDNI.Location = new System.Drawing.Point(131, 12);
+            this.txtDNI.Location = new System.Drawing.Point(163, 12);
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.ReadOnly = true;
-            this.txtDNI.Size = new System.Drawing.Size(139, 31);
+            this.txtDNI.Size = new System.Drawing.Size(178, 31);
             this.txtDNI.TabIndex = 5;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(276, 15);
+            this.label6.Location = new System.Drawing.Point(407, 164);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(80, 25);
             this.label6.TabIndex = 10;
@@ -216,9 +194,9 @@
             // 
             // txtApeNom
             // 
-            this.txtApeNom.Location = new System.Drawing.Point(131, 49);
+            this.txtApeNom.Location = new System.Drawing.Point(163, 49);
             this.txtApeNom.Name = "txtApeNom";
-            this.txtApeNom.Size = new System.Drawing.Size(614, 31);
+            this.txtApeNom.Size = new System.Drawing.Size(582, 31);
             this.txtApeNom.TabIndex = 6;
             this.txtApeNom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApeNom_KeyPress);
             // 
@@ -226,23 +204,23 @@
             // 
             this.txtAutogenerado.Location = new System.Drawing.Point(163, 161);
             this.txtAutogenerado.Name = "txtAutogenerado";
-            this.txtAutogenerado.Size = new System.Drawing.Size(149, 31);
+            this.txtAutogenerado.Size = new System.Drawing.Size(178, 31);
             this.txtAutogenerado.TabIndex = 9;
             this.txtAutogenerado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAutogenerado_KeyPress);
             // 
             // txtCTrabajo
             // 
-            this.txtCTrabajo.Location = new System.Drawing.Point(131, 86);
+            this.txtCTrabajo.Location = new System.Drawing.Point(163, 86);
             this.txtCTrabajo.Name = "txtCTrabajo";
-            this.txtCTrabajo.Size = new System.Drawing.Size(614, 31);
+            this.txtCTrabajo.Size = new System.Drawing.Size(582, 31);
             this.txtCTrabajo.TabIndex = 7;
             this.txtCTrabajo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCTrabajo_KeyPress);
             // 
             // txtCargo
             // 
-            this.txtCargo.Location = new System.Drawing.Point(131, 123);
+            this.txtCargo.Location = new System.Drawing.Point(163, 123);
             this.txtCargo.Name = "txtCargo";
-            this.txtCargo.Size = new System.Drawing.Size(614, 31);
+            this.txtCargo.Size = new System.Drawing.Size(582, 31);
             this.txtCargo.TabIndex = 8;
             this.txtCargo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCargo_KeyPress);
             // 
@@ -254,26 +232,11 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(755, 40);
+            this.panel2.Size = new System.Drawing.Size(757, 40);
             this.panel2.TabIndex = 1;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseUp);
-            // 
-            // btnCerrar
-            // 
-            this.btnCerrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnCerrar.FlatAppearance.BorderSize = 0;
-            this.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
-            this.btnCerrar.Location = new System.Drawing.Point(715, 0);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(40, 40);
-            this.btnCerrar.TabIndex = 1;
-            this.btnCerrar.UseVisualStyleBackColor = false;
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // label9
             // 
@@ -286,12 +249,27 @@
             this.label9.TabIndex = 2;
             this.label9.Text = "Editar Personal";
             // 
+            // btnCerrar
+            // 
+            this.btnCerrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnCerrar.FlatAppearance.BorderSize = 0;
+            this.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
+            this.btnCerrar.Location = new System.Drawing.Point(717, 0);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(40, 40);
+            this.btnCerrar.TabIndex = 1;
+            this.btnCerrar.UseVisualStyleBackColor = false;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
             // FrmEditarPersonalSubcidiado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(97)))), ((int)(((byte)(141)))));
-            this.ClientSize = new System.Drawing.Size(755, 313);
+            this.ClientSize = new System.Drawing.Size(757, 306);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.panel1);
@@ -313,7 +291,6 @@
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cBoxTipoServidor;
-        private System.Windows.Forms.TextBox txtCargo2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCodigo;
@@ -321,7 +298,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtApeNom;

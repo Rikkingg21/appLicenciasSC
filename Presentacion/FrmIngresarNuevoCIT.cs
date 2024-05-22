@@ -82,6 +82,7 @@ namespace appLicenciasSC.Presentacion
 
             // Calcular la diferencia en días
             int diferenciaEnDias = (int)(fechaFin - fechaInicio).TotalDays;
+            diferenciaEnDias += 1;
 
             // Validar que la diferencia sea positiva y mayor que 0
             if (cboxTPrestacion.Text == "")
@@ -284,18 +285,19 @@ namespace appLicenciasSC.Presentacion
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
-
         private void txtCIT_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
-
         private void txtColMedico_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
-
         private void txtExpediente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+        private void cboxInforme_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }

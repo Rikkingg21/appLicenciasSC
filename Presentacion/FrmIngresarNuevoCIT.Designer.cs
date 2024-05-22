@@ -209,6 +209,7 @@
             this.cboxInforme.Name = "cboxInforme";
             this.cboxInforme.Size = new System.Drawing.Size(176, 33);
             this.cboxInforme.TabIndex = 31;
+            this.cboxInforme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboxInforme_KeyPress);
             // 
             // txtDiasLic
             // 
@@ -224,6 +225,7 @@
             this.txtExpediente.Name = "txtExpediente";
             this.txtExpediente.Size = new System.Drawing.Size(235, 31);
             this.txtExpediente.TabIndex = 27;
+            this.txtExpediente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtExpediente_KeyPress);
             // 
             // label7
             // 
@@ -251,6 +253,7 @@
             this.txtColMedico.Name = "txtColMedico";
             this.txtColMedico.Size = new System.Drawing.Size(235, 31);
             this.txtColMedico.TabIndex = 24;
+            this.txtColMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtColMedico_KeyPress);
             // 
             // label5
             // 
@@ -296,6 +299,7 @@
             this.txtCIT.Name = "txtCIT";
             this.txtCIT.Size = new System.Drawing.Size(211, 31);
             this.txtCIT.TabIndex = 19;
+            this.txtCIT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCIT_KeyPress);
             // 
             // label3
             // 
@@ -320,6 +324,7 @@
             this.cboxTPrestacion.Name = "cboxTPrestacion";
             this.cboxTPrestacion.Size = new System.Drawing.Size(267, 33);
             this.cboxTPrestacion.TabIndex = 17;
+            this.cboxTPrestacion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboxTPrestacion_KeyPress);
             // 
             // label2
             // 
@@ -354,7 +359,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(97)))), ((int)(((byte)(141)))));
-            this.ClientSize = new System.Drawing.Size(878, 317);
+            this.ClientSize = new System.Drawing.Size(878, 321);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblDiasEmpleador);
@@ -404,7 +409,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtApellidosNombres;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnCerrar;
     }
 }
