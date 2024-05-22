@@ -61,18 +61,81 @@ namespace appLicenciasSC.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap periodo_de_tiempo1 {
+            get {
+                object obj = ResourceManager.GetObject("periodo-de-tiempo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
         ///	&lt;title&gt;paginaweb&lt;/title&gt;
-        ///&lt;/head&gt;
-        ///&lt;boddy&gt;
-        ///&lt;/boddy&gt;
-        ///&lt;/html&gt;.
+        ///	&lt;style&gt;
+        ///        table {
+        ///            border-collapse: collapse;
+        ///            width: 100%;
+        ///            border: 2px solid #333;
+        ///        }
+        ///
+        ///        th, td {
+        ///            border: 1px solid #333;
+        ///            padding: 8px;
+        ///            text-align: center;
+        ///            font-size: 12px;
+        ///        }
+        ///
+        ///        tr:nth-child(even) {
+        ///            background-color: #f2f2f2;
+        ///        }
+        ///
+        ///        th {
+        ///            background-color: #ddd;
+        ///        }
+        ///
+        ///	&lt;/s [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string plantilla {
             get {
                 return ResourceManager.GetString("plantilla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;paginaweb&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table {
+        ///            border-collapse: collapse;
+        ///            width: 100%;
+        ///            border: 2px solid #333;
+        ///        }
+        ///
+        ///        th, td {
+        ///            border: 1px solid #333;
+        ///            padding: 8px;
+        ///            text-align: center;
+        ///            font-size: 10px;
+        ///        }
+        ///
+        ///        tr:nth-child(even) {
+        ///            background-color: #f2f2f2;
+        ///        }
+        ///
+        ///        th {
+        ///            background-color: #ddd;
+        ///        }
+        /// [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string plantillaPeriodo {
+            get {
+                return ResourceManager.GetString("plantillaPeriodo", resourceCulture);
             }
         }
     }

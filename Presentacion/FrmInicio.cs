@@ -17,6 +17,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Globalization;
+using System.Collections.Generic;
 
 
 namespace appLicenciasSC.Presentacion
@@ -124,6 +125,7 @@ namespace appLicenciasSC.Presentacion
         }
         private void cboxAnio_SelectedIndexChanged(object sender, EventArgs e) {
             string anio = cboxAnio.Text;
+            
             ActualizarTabla1();
             AplicarPintadoFilas();
             CalcularFechaInicioEsSalud(anio);
@@ -174,15 +176,24 @@ namespace appLicenciasSC.Presentacion
         {
             try
             {
+                // Obtener el año seleccionado en el ComboBox
+                string anioSeleccionado = cboxAnio.SelectedItem.ToString();
+
                 // Consulta SQL para obtener los registros de PERSONAL_CIT que cumplen con las condiciones
                 string query = @"SELECT DNI, SUM(EsSalud) AS TotalDias
-                 FROM PERSONAL_CIT
-                 WHERE SUBSTR(F_INICIO, -4) = '2024' AND INFORME = 'CANJE'
-                 GROUP BY DNI
-                 HAVING SUM(EsSalud) > 20";
+                         FROM PERSONAL_CIT
+                         WHERE SUBSTR(F_INICIO, -4) = @anio AND INFORME = 'CANJE'
+                         GROUP BY DNI
+                         HAVING SUM(EsSalud) > 20";
+
+                // Crear un array de parámetros para el año
+                SQLiteParameter[] parametros = new SQLiteParameter[]
+                {
+            new SQLiteParameter("@anio", anioSeleccionado)
+                };
 
                 // Ejecutar la consulta y obtener un DataTable
-                DataTable dataTable = conexion.EjecutarConsulta(query);
+                DataTable dataTable = conexion.EjecutarConsulta(query, parametros);
 
                 // Iterar sobre las filas del DataGridView
                 foreach (DataGridViewRow row in dgvTabla1.Rows)
@@ -195,9 +206,7 @@ namespace appLicenciasSC.Presentacion
                     if (resultados.Length > 0)
                     {
                         // Si el DNI existe y cumple con las condiciones, pintar la fila de rojo
-                        //row.DefaultCellStyle.BackColor = Color.White;
                         row.DefaultCellStyle.ForeColor = Color.FromArgb(236, 112, 99);
-
 
                         // Verificar si la fila actual es la fila seleccionada
                         if (dgvTabla1.CurrentRow != null && dgvTabla1.CurrentRow.Index == row.Index)
@@ -206,11 +215,9 @@ namespace appLicenciasSC.Presentacion
                             row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(236, 112, 99);
                             row.DefaultCellStyle.ForeColor = Color.White;
                         }
-
                     }
                     else
                     {
-                        //row.DefaultCellStyle.BackColor = Color.Cyan;
                         row.DefaultCellStyle.ForeColor = Color.White;
                         row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(46, 134, 193);
                     }
@@ -221,7 +228,6 @@ namespace appLicenciasSC.Presentacion
                 MessageBox.Show("Error al aplicar el pintado de filas en dgvTabla1: " + ex.Message);
             }
         }
-
         private int CalcularTotalDias(string dni, string anio)
         {
             int totalDias = 0;
@@ -252,8 +258,6 @@ namespace appLicenciasSC.Presentacion
             }
             return totalDias;
         }
-       
-        
 
         #region AGREGAR PERSONAL
         //agregar personal
@@ -516,8 +520,6 @@ namespace appLicenciasSC.Presentacion
             }
         }
 
-
-
         private void dgvTabla1_SelectionChanged(object sender, EventArgs e)
         {
             ActualizarTabla2();
@@ -703,6 +705,15 @@ namespace appLicenciasSC.Presentacion
             }
         }
 
+        private void imprimirPorPersonaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void imprimirPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SeleccionDePeriodo seleccionDePeriodo = new SeleccionDePeriodo();
+            seleccionDePeriodo.Show();
+        }
         // Método para verificar si el archivo está en uso
         private bool IsFileInUse(string filePath)
         {
@@ -720,84 +731,133 @@ namespace appLicenciasSC.Presentacion
             return false;
         }
         #endregion
-
-
-
-        
-
-        
-
-        private void descargarPersonaToolStripMenuItem_Click(object sender, EventArgs e)
+        #region EXCEL
+        private void toolStripMenuItem15_Click(object sender, EventArgs e)
         {
-            IWorkbook workbook = new XSSFWorkbook();
-
-            // Crear una hoja de Excel
-            ISheet sheet = workbook.CreateSheet("Datos");
-
-            // Obtener la fila seleccionada en dgvTabla1
-            DataGridViewRow filaSeleccionada = dgvTabla1.SelectedRows[0];
-
-            // Crear la estructura de la tabla en el archivo Excel
-            IRow rowHeader = sheet.CreateRow(0);
-            rowHeader.CreateCell(0).SetCellValue("Apellidos y Nombre:");
-            rowHeader.CreateCell(1).SetCellValue("DNI:");
-            rowHeader.CreateCell(2).SetCellValue("Cargo:");
-            rowHeader.CreateCell(3).SetCellValue("Centro de Trabajo:");
-            rowHeader.CreateCell(4).SetCellValue("Tipo Servidor:");
-            rowHeader.CreateCell(5).SetCellValue("Autogenerado:");
-            rowHeader.CreateCell(6).SetCellValue("Fecha Inicio EsSalud:");
-            rowHeader.CreateCell(7).SetCellValue("Días Totales:");
-
-            // Escribir los datos de la fila seleccionada en dgvTabla1 en el archivo de Excel
-            IRow rowSelectedData = sheet.CreateRow(1);
-            for (int i = 0; i < dgvTabla1.Columns.Count; i++)
+            try
             {
-                rowSelectedData.CreateCell(i).SetCellValue(Convert.ToString(filaSeleccionada.Cells[i].Value));
-            }
+                IWorkbook workbook = new XSSFWorkbook();
 
-            // Agregar las cabeceras de las columnas del dgvTabla2
-            IRow rowColumnHeaders = sheet.CreateRow(3);
-            string[] columnasAMostrar = { "N° C.I.T.", "Fecha Inicio", "Fecha Fin", "Col Medico", "Tipo", "Dias", "Empleador", "EsSalud", "Expediente" };
-            for (int i = 0; i < columnasAMostrar.Length; i++)
-            {
-                rowColumnHeaders.CreateCell(i).SetCellValue(columnasAMostrar[i]);
-            }
+                // Crear una hoja de Excel
+                ISheet sheet = workbook.CreateSheet("Datos");
 
-            // Escribir los datos de dgvTabla2 en el archivo de Excel
-            for (int i = 0; i < dgvTabla2.Rows.Count; i++)
-            {
-                IRow rowData = sheet.CreateRow(i + 4);
-                for (int j = 0; j < columnasAMostrar.Length; j++)
+                // Crear estilo para centrar el texto y alinearlo al medio
+                ICellStyle centeredStyle = workbook.CreateCellStyle();
+                centeredStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+                centeredStyle.VerticalAlignment = VerticalAlignment.Center;
+
+                // Crear estilo para formato normal (sin centrado)
+                ICellStyle normalStyle = workbook.CreateCellStyle();
+                normalStyle.VerticalAlignment = VerticalAlignment.Center;
+
+                // Obtener la fila seleccionada en dgvTabla1
+                DataGridViewRow filaSeleccionada = dgvTabla1.SelectedRows[0];
+                string apellidosNombres = filaSeleccionada.Cells["Apellidos y Nombres"].Value.ToString();
+                string dni = filaSeleccionada.Cells["DNI"].Value.ToString();
+                string cargo = filaSeleccionada.Cells["Cargo"].Value.ToString();
+                string cTrabajo = filaSeleccionada.Cells["C_Trabajo"].Value.ToString();
+                string tipoServidor = filaSeleccionada.Cells["TIPO_SERVIDOR"].Value.ToString();
+                string autogenerado = filaSeleccionada.Cells["Autogenerado"].Value.ToString();
+                string fecha = DateTime.Now.ToString("dd/MM/yyyy");
+
+                // Crear las celdas combinadas y agregar los textos
+                IRow row1 = sheet.CreateRow(0);
+                ICell cellA1 = row1.CreateCell(0);
+                cellA1.SetCellValue("Unidad de Gestión Local de Tacna - UGEL TACNA");
+                cellA1.CellStyle = centeredStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, 6)); // A1 - G1
+
+                IRow row2 = sheet.CreateRow(1);
+                ICell cellA2 = row2.CreateCell(0);
+                cellA2.SetCellValue("RUC: 2053302557");
+                cellA2.CellStyle = centeredStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(1, 1, 0, 6)); // A2 - G2
+
+                IRow row3 = sheet.CreateRow(2);
+                ICell cellA3 = row3.CreateCell(0);
+                cellA3.SetCellValue("Record de licencia por Salud");
+                cellA3.CellStyle = centeredStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(2, 2, 0, 8)); // A3 - I3
+
+                IRow row4 = sheet.CreateRow(3);
+                ICell cellA4 = row4.CreateCell(0);
+                cellA4.SetCellValue($"Servidor: {apellidosNombres}");
+                cellA4.CellStyle = normalStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(3, 3, 0, 3)); // A4 - D4
+
+                ICell cellE4 = row4.CreateCell(4);
+                cellE4.SetCellValue($"DNI: {dni}");
+                cellE4.CellStyle = normalStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(3, 3, 4, 5)); // E4 - F4
+
+                ICell cellG4 = row4.CreateCell(6);
+                cellG4.SetCellValue($"Situación: {tipoServidor}");
+                cellG4.CellStyle = normalStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(3, 3, 6, 8)); // G4 - I4
+
+                IRow row5 = sheet.CreateRow(4);
+                ICell cellA5 = row5.CreateCell(0);
+                cellA5.SetCellValue($"Centro de trabajo: {cTrabajo}");
+                cellA5.CellStyle = normalStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(4, 4, 0, 8)); // A5 - I5
+
+                ICell cellH1 = row1.CreateCell(7);
+                cellH1.SetCellValue("Fecha:");
+                cellH1.CellStyle = normalStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 7, 8)); // H1 - I1
+
+                IRow row1_part2 = sheet.CreateRow(1); // Reuse existing row 1
+                ICell cellH2 = row1_part2.CreateCell(7);
+                cellH2.SetCellValue(fecha);
+                cellH2.CellStyle = normalStyle;
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(1, 1, 7, 8)); // H2 - I2
+
+                // Agregar las cabeceras de las columnas del dgvTabla2
+                IRow rowColumnHeaders = sheet.CreateRow(6);
+                string[] columnasAMostrar = { "N° C.I.T.", "Fecha Inicio", "Fecha Fin", "Col Medico", "Tipo", "Dias", "Empleador", "EsSalud", "Expediente" };
+                for (int i = 0; i < columnasAMostrar.Length; i++)
                 {
-                    rowData.CreateCell(j).SetCellValue(Convert.ToString(dgvTabla2.Rows[i].Cells[columnasAMostrar[j]].Value));
+                    rowColumnHeaders.CreateCell(i).SetCellValue(columnasAMostrar[i]);
+                }
+
+                // Escribir los datos de dgvTabla2 en el archivo de Excel
+                for (int i = 0; i < dgvTabla2.Rows.Count; i++)
+                {
+                    IRow rowData = sheet.CreateRow(i + 7); // Crear filas de datos empezando desde la fila 8
+                    for (int j = 0; j < columnasAMostrar.Length; j++)
+                    {
+                        rowData.CreateCell(j).SetCellValue(Convert.ToString(dgvTabla2.Rows[i].Cells[columnasAMostrar[j]].Value));
+                    }
+                }
+
+                for (int i = 0; i < columnasAMostrar.Length; i++)
+                {
+                    sheet.AutoSizeColumn(i);
+                }
+
+                // Mostrar el diálogo para seleccionar la ubicación y nombre del archivo
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                saveFileDialog.Filter = "Archivos de Excel (*.xlsx)|*.xlsx";
+                saveFileDialog.FileName = "datos.xlsx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Guardar el libro de Excel en la ubicación seleccionada
+                    using (var fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
+                    {
+                        workbook.Write(fileStream);
+                    }
+                    MessageBox.Show("Los datos se han exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            for (int i = 0; i < columnasAMostrar.Length; i++)
+            catch (Exception ex)
             {
-                sheet.AutoSizeColumn(i);
-            }
-
-            // Mostrar el diálogo para seleccionar la ubicación y nombre del archivo
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            saveFileDialog.Filter = "Archivos de Excel (*.xlsx)|*.xlsx";
-            saveFileDialog.FileName = "datos.xlsx";
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Guardar el libro de Excel en la ubicación seleccionada
-                using (var fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write))
-                {
-                    workbook.Write(fileStream);
-                }
-                MessageBox.Show("Los datos se han exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Ocurrió un error al exportar a Excel: {ex.Message}\n\nDetalles:\n{ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void descargarPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+        
+        #endregion
         private class MiRenderizador : ToolStripProfessionalRenderer
         {
             protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
@@ -815,24 +875,102 @@ namespace appLicenciasSC.Presentacion
                 }
             }
         }
-        private void toolStripMenuItem15_MouseEnter(object sender, EventArgs e)
+        
+        private void descargarPeriodoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
+            SeleccionDePeriodo seleccionDePeriodo = new SeleccionDePeriodo();
+            seleccionDePeriodo.Show();
         }
 
-        private void toolStripMenuItem15_MouseLeave(object sender, EventArgs e)
+        
+
+        private void btnCerrar_Click(object sender, EventArgs e)
         {
-            //toolStripMenuItem15.BackColor = Color.FromArgb(31, 97, 141);
+            // Lista de nombres de formularios específicos a verificar
+            List<string> nombresFormularios = new List<string>
+            {
+                "FrmEditarNuevoCIT",
+                "FrmEditarPersonalSubcidiado",
+                "FrmIngresarNuevoCIT",
+                "FrmIngresoPersonalSubcidiado",
+                "FrmVistaPDF",
+                "SeleccionDePeriodo"
+            };
+
+            bool hayFormulariosAbiertos = false;
+
+            // Lista temporal para almacenar los formularios que se van a cerrar
+            List<Form> formulariosACerrar = new List<Form>();
+
+            // Iterar a través de todos los formularios abiertos
+            foreach (Form form in Application.OpenForms)
+            {
+                // Si el nombre del formulario está en la lista
+                if (nombresFormularios.Contains(form.Name))
+                {
+                    hayFormulariosAbiertos = true;
+                    formulariosACerrar.Add(form);
+                }
+            }
+
+            // Cerrar los formularios desde la lista temporal
+            foreach (Form form in formulariosACerrar)
+            {
+                form.Close();
+            }
+
+            if (hayFormulariosAbiertos)
+            {
+                MessageBox.Show("Se cerraron todos los formularios abiertos.", "Cerrar Formularios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                this.Close();
+                Application.Exit();
+            }
+
         }
 
-        private void descargarPersonaToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        private bool mouseDown;
+        private Point lastLocation;
+        private void panelSuperior_MouseDown(object sender, MouseEventArgs e)
         {
-            descargarPersonaToolStripMenuItem.BackColor = Color.FromArgb(31, 97, 141);
+            mouseDown = true;
+            lastLocation = e.Location;
         }
 
-        private void descargarPersonaToolStripMenuItem_MouseLeave(object sender, EventArgs e)
+        private void panelSuperior_MouseMove(object sender, MouseEventArgs e)
         {
-            descargarPersonaToolStripMenuItem.BackColor = SystemColors.Control;
+            if (mouseDown)
+            {
+                int deltaX = e.Location.X - lastLocation.X;
+                int deltaY = e.Location.Y - lastLocation.Y;
+                this.Location = new Point(this.Location.X + deltaX, this.Location.Y + deltaY);
+            }
+        }
+
+        private void panelSuperior_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void iconmaximizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            iconrestaurar.Visible = true;
+            iconmaximizar.Visible = false;
+        }
+
+        private void iconrestaurar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            iconrestaurar.Visible = false;
+            iconmaximizar.Visible = true;
+        }
+
+        private void iconminimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -69,8 +69,7 @@ namespace appLicenciasSC.Presentacion
                 e.Handled = true;
             }
         }
-
-        private void txtApeNom_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtApeNom_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
@@ -78,23 +77,15 @@ namespace appLicenciasSC.Presentacion
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
-
         private void txtCargo_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
-
         private void txtAutogenerado_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
-
         private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.KeyChar = char.ToUpper(e.KeyChar);
-        }
-
-        private void txtCargo2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
@@ -102,6 +93,7 @@ namespace appLicenciasSC.Presentacion
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
+
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
@@ -130,5 +122,7 @@ namespace appLicenciasSC.Presentacion
         {
             mouseDown = false;
         }
+
+        
     }
 }
